@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 export default function AddBook() {
+  const API = 'https://books-review-platform-new.onrender.com';
   const [book, setBook] = useState({
     title: '', author: '', description: '', coverImage: '', rating: ''
   });
@@ -10,7 +11,7 @@ export default function AddBook() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/books', book);
+    await axios.post(`${API}/books`, book);
     alert('Book added!');
     setBook({ title: '', author: '', description: '', coverImage: '', rating: '' });
   };

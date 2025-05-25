@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function UserProfile() {
+  const API = 'https://books-review-platform-new.onrender.com';
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [form, setForm] = useState({ name: '', email: '', bio: '' });
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/users/${id}`)
+    axios.get(`${API}/users/${id}`)
       .then(res => {
         setUser(res.data);
         setForm(res.data);
@@ -18,7 +19,7 @@ export default function UserProfile() {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleUpdate = async () => {
-    const res = await axios.put(`http://localhost:5000/users/${id}`, form);
+    const res = await axios.put(`${API}/users/${id}`, form);
     setUser(res.data);
     alert('Profile updated!');
   };

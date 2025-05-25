@@ -3,11 +3,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
+  const API = 'https://books-review-platform-new.onrender.com';
   const [books, setBooks] = useState([]);
   const [allBooks, setAllBooks] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/books')
+    axios.get(`${API}/books`)
       .then(res => {
         setBooks(res.data);
         setAllBooks(res.data);

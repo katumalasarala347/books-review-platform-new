@@ -8,19 +8,21 @@ export default function BookPage() {
   const [reviews, setReviews] = useState([]);
   const [review, setReview] = useState({ user: '', rating: '', comment: '' });
 
+  const API = 'https://books-review-platform-new.onrender.com';
+
   useEffect(() => {
-    axios.get(`http://localhost:5000/books/${id}`)
+    axios.get(`${API}/books/${id}`)
       .then(res => setBook(res.data));
 
-    axios.get(`http://localhost:5000/reviews?bookId=${id}`)
+    axios.get(`${API}/reviews?bookId=${id}`)
       .then(res => setReviews(res.data));
   }, [id]);
 
   const submitReview = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/reviews', { ...review, bookId: id });
+    await axios.post(`${API}/reviews`, { ...review, bookId: id });
     setReview({ user: '', rating: '', comment: '' });
-    const res = await axios.get(`http://localhost:5000/reviews?bookId=${id}`);
+    const res = await axios.get(`${API}/reviews?bookId=${id}`);
     setReviews(res.data);
   };
 
